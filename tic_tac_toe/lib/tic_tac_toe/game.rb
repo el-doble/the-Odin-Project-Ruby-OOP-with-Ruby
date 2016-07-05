@@ -31,7 +31,12 @@ module TicTacToe
 				puts ""
 				puts solicit_move
 				x, y = get_move
-				board.set_cell(x, y, current_player.color)
+				if board.get_cell(x, y).value.empty?
+					board.set_cell(x, y, current_player.color)
+				elsif board.get_cell(x, y).value == other_player.color
+					puts "That move has been taken, please try again."
+					switch_players
+				end
 				if board.game_over
 					puts game_over_message
 					board.formatted_grid
